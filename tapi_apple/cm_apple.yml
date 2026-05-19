@@ -1,0 +1,94 @@
+---
+# SPDX-License-Identifier: MIT
+
+- comment: |
+    iOS devices and simulators on an agent, served by ta_apple.
+
+    Copyright (C) 2026 Interpretica, Unipessoal Lda. All rights reserved.
+
+
+- register:
+
+    - oid: "/agent/apple"
+      access: read_only
+      type: none
+      d: |
+         Root of the Apple subtree.
+         Name: empty
+
+    - oid: "/agent/apple/device"
+      access: read_only
+      type: none
+      volatile: true
+      d: |
+         A device attached to the agent (usbmuxd).
+         Name: device UDID
+
+    - oid: "/agent/apple/device/name"
+      access: read_only
+      type: string
+      volatile: true
+      d: |
+         The device name, the lockdownd DeviceName value.
+         Name: empty
+
+    - oid: "/agent/apple/device/product"
+      access: read_only
+      type: string
+      volatile: true
+      d: |
+         The product type, for example iPhone15,5.
+         Name: empty
+
+    - oid: "/agent/apple/device/version"
+      access: read_only
+      type: string
+      volatile: true
+      d: |
+         The iOS version.
+         Name: empty
+
+    - oid: "/agent/apple/device/app"
+      access: read_create
+      type: string
+      d: |
+         An installed user app. Adding an instance installs the
+         package named by the value; deleting it uninstalls the app.
+         Name: bundle identifier
+         Value: .ipa file or .app directory on the agent when adding,
+                empty afterwards
+
+    - oid: "/agent/apple/simulator"
+      access: read_only
+      type: none
+      volatile: true
+      d: |
+         A simulator available on a macOS agent.
+         Name: simulator UDID
+
+    - oid: "/agent/apple/simulator/name"
+      access: read_only
+      type: string
+      volatile: true
+      d: |
+         The simulator name, for example "iPhone 15".
+         Name: empty
+
+    - oid: "/agent/apple/simulator/state"
+      access: read_write
+      type: string
+      volatile: true
+      d: |
+         The simulator state. Setting it boots or shuts the simulator
+         down.
+         Name: empty
+         Value: "Booted" or "Shutdown"
+
+    - oid: "/agent/apple/simulator/app"
+      access: read_create
+      type: string
+      d: |
+         An installed user app, as for devices.
+         Name: bundle identifier
+         Value: .app directory or .ipa file on the agent when adding,
+                empty afterwards
